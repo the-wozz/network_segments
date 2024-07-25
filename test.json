@@ -1,12 +1,6 @@
 {
   "network_segments": [
     {
-      "id": 1,
-      "name": ".Everywhere",
-      "starting_address": "1.0.0.0",
-      "ending_address": "255.255.255.255"
-    },
-    {
       "id": 3,
       "name": "EMEA-Germany-Eggstaett (DEEG)",
       "starting_address": "10.90.0.0",
