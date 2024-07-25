@@ -1,0 +1,790 @@
+{
+  "network_segments": [
+    {
+      "id": 1,
+      "name": ".Everywhere",
+      "starting_address": "1.0.0.0",
+      "ending_address": "255.255.255.255"
+    },
+    {
+      "id": 3,
+      "name": "EMEA-Germany-Eggstaett (DEEG)",
+      "starting_address": "10.90.0.0",
+      "ending_address": "10.90.255.254"
+    },
+    {
+      "id": 4,
+      "name": "EMEA-Switzerland-Biel (CHBI)",
+      "starting_address": "10.81.64.0",
+      "ending_address": "10.81.95.254"
+    },
+    {
+      "id": 5,
+      "name": "EMEA-Switzerland-Biel - Ritterwig (CHBR)",
+      "starting_address": "172.19.162.1",
+      "ending_address": "172.19.162.254"
+    },
+    {
+      "id": 6,
+      "name": "EMEA-Switzerland-Basel (CHBS)",
+      "starting_address": "10.80.20.0",
+      "ending_address": "10.80.255.254"
+    },
+    {
+      "id": 7,
+      "name": "EMEA-Switzerland-Basel (CHBS) - 2",
+      "starting_address": "10.82.0.1",
+      "ending_address": "10.82.31.254"
+    },
+    {
+      "id": 8,
+      "name": "EMEA-Switzerland-Basel (CHBS) - 3",
+      "starting_address": "172.19.12.1",
+      "ending_address": "172.19.12.254"
+    },
+    {
+      "id": 9,
+      "name": "EMEA-Switzerland-Glovelier (CHGL)",
+      "starting_address": "10.81.164.0",
+      "ending_address": "10.81.180.254"
+    },
+    {
+      "id": 10,
+      "name": "EMEA-Switzerland-Manno (CHMN)",
+      "starting_address": "10.81.128.0",
+      "ending_address": "10.81.138.254"
+    },
+    {
+      "id": 11,
+      "name": "EMEA-Switzerland-Reinach (CHRE)",
+      "starting_address": "10.81.4.0",
+      "ending_address": "10.81.10.254"
+    },
+    {
+      "id": 12,
+      "name": "EMEA-Austria-Salzburg (ATSA)",
+      "starting_address": "10.71.0.0",
+      "ending_address": "10.71.31.254"
+    },
+    {
+      "id": 13,
+      "name": "EMEA-AE-Dubai (AEDB)",
+      "starting_address": "10.66.0.0",
+      "ending_address": "10.66.255.254"
+    },
+    {
+      "id": 14,
+      "name": "EMEA-Germany-Eggstaett (DEEG)-2",
+      "starting_address": "172.19.6.0",
+      "ending_address": "172.19.11.254"
+    },
+    {
+      "id": 15,
+      "name": "EMEA-Germany-Viernheim (DEEV)",
+      "starting_address": "10.91.96.1",
+      "ending_address": "10.91.127.254"
+    },
+    {
+      "id": 16,
+      "name": "EMEA-Germany-Grabenstaett (DEGR)",
+      "starting_address": "10.70.0.0",
+      "ending_address": "10.70.255.254"
+    },
+    {
+      "id": 17,
+      "name": "EMEA-Germany-Liederbach (DELI)",
+      "starting_address": "10.91.32.0",
+      "ending_address": "10.91.63.254"
+    },
+    {
+      "id": 18,
+      "name": "EMEA-Germany-Liederbach (DELI)-2",
+      "starting_address": "172.19.146.0",
+      "ending_address": "172.19.146.254"
+    },
+    {
+      "id": 19,
+      "name": "EMEA-Germany-Pforzheim (DEVE)",
+      "starting_address": "172.19.165.0",
+      "ending_address": "172.19.165.254"
+    },
+    {
+      "id": 20,
+      "name": "EMEA-Germany-Munich (DEMU)",
+      "starting_address": "10.91.100.0",
+      "ending_address": "10.91.137.254"
+    },
+    {
+      "id": 21,
+      "name": "EMEA-Germany-Munich (DEMU)-2",
+      "starting_address": "172.19.150.0",
+      "ending_address": "172.19.150.254"
+    },
+    {
+      "id": 22,
+      "name": "EMEA-Germany-Pforzheim (DEVE)-2",
+      "starting_address": "10.91.64.1",
+      "ending_address": "10.91.95.254"
+    },
+    {
+      "id": 23,
+      "name": "EMEA-Denmark-Brondby (DKBO)",
+      "starting_address": "10.88.0.0",
+      "ending_address": "10.88.31.254"
+    },
+    {
+      "id": 24,
+      "name": "EMEA-Spain-Barcelona (ESBA)",
+      "starting_address": "10.76.0.0",
+      "ending_address": "10.76.31.254"
+    },
+    {
+      "id": 25,
+      "name": "EMEA-Italy-Milano (ITMI)",
+      "starting_address": "10.75.32.0",
+      "ending_address": "10.75.50.0"
+    },
+    {
+      "id": 26,
+      "name": "EMEA-Italy-Milano (ITMI)-2",
+      "starting_address": "172.19.205.0",
+      "ending_address": "172.19.205.254"
+    },
+    {
+      "id": 27,
+      "name": "EMEA-Italy-Parma (ITPA)",
+      "starting_address": "10.75.64.0",
+      "ending_address": "10.75.95.254"
+    },
+    {
+      "id": 28,
+      "name": "EMEA-Italy-Parma (ITPA)-2",
+      "starting_address": "172.19.204.0",
+      "ending_address": "172.19.204.254"
+    },
+    {
+      "id": 29,
+      "name": "EMEA-Italy-Vicenza (ITVI)",
+      "starting_address": "10.75.0.0",
+      "ending_address": "10.75.31.254"
+    },
+    {
+      "id": 30,
+      "name": "EMEA-Italy-Vicenza (ITVI)-2",
+      "starting_address": "172.19.200.0",
+      "ending_address": "172.19.203.254"
+    },
+    {
+      "id": 31,
+      "name": "EMEA-France-Monswiller (FRMO)",
+      "starting_address": "10.85.0.0",
+      "ending_address": "10.85.31.254"
+    },
+    {
+      "id": 32,
+      "name": "EMEA-France-Monswiller (FRMO)-2",
+      "starting_address": "172.19.130.0",
+      "ending_address": "172.19.134.254"
+    },
+    {
+      "id": 33,
+      "name": "EMEA-Netherlands-Doetinchem (NLDO)",
+      "starting_address": "10.86.0.0",
+      "ending_address": "10.86.31.254"
+    },
+    {
+      "id": 34,
+      "name": "EMEA-Netherlands-Doetinchem (NLDO)-2",
+      "starting_address": "172.19.145.0",
+      "ending_address": "172.19.145.254"
+    },
+    {
+      "id": 35,
+      "name": "EMEA-Poland-Washaw (PLWA)",
+      "starting_address": "10.72.0.0",
+      "ending_address": "10.72.255.254"
+    },
+    {
+      "id": 36,
+      "name": "EMEA-Sweden-Gothenberg (SEGO)",
+      "starting_address": "10.87.0.0",
+      "ending_address": "10.87.255.254"
+    },
+    {
+      "id": 37,
+      "name": "EMEA-UK-London (UKLO)",
+      "starting_address": "172.19.151.1",
+      "ending_address": "172.19.151.254"
+    },
+    {
+      "id": 38,
+      "name": "EMEA-UK-MiltonKeynes (UKMK)",
+      "starting_address": "10.64.0.0",
+      "ending_address": "10.64.31.254"
+    },
+    {
+      "id": 39,
+      "name": "EMEA-UK-MiltonKeynes (UKMK)-2",
+      "starting_address": "172.19.152.0",
+      "ending_address": "172.19.158.254"
+    },
+    {
+      "id": 40,
+      "name": "EMEA-South Africa-Capetown (ZACT)",
+      "starting_address": "10.65.0.0",
+      "ending_address": "10.65.31.254"
+    },
+    {
+      "id": 41,
+      "name": "NA-Canada-Toronto (CATO)",
+      "starting_address": "10.40.96.1",
+      "ending_address": "10.40.127.254"
+    },
+    {
+      "id": 42,
+      "name": "NA-Canada-Toronto (CATO)-2",
+      "starting_address": "172.17.48.1",
+      "ending_address": "172.17.48.254"
+    },
+    {
+      "id": 43,
+      "name": "NA-Mexico-Monterrey (MXMO)",
+      "starting_address": "10.50.0.1",
+      "ending_address": "10.50.65.254"
+    },
+    {
+      "id": 44,
+      "name": "NA-US-Chicago (USCH)",
+      "starting_address": "10.40.64.1",
+      "ending_address": "10.40.95.254"
+    },
+    {
+      "id": 45,
+      "name": "NA-US-Chicago (USCH)-2",
+      "starting_address": "172.17.32.1",
+      "ending_address": "172.17.32.254"
+    },
+    {
+      "id": 46,
+      "name": "NA-US-Atlanta (USGR)",
+      "starting_address": "10.40.160.1",
+      "ending_address": "10.40.191.254"
+    },
+    {
+      "id": 47,
+      "name": "NA-US-Atlanta (USGR)-2",
+      "starting_address": "172.17.40.1",
+      "ending_address": "172.17.40.254"
+    },
+    {
+      "id": 48,
+      "name": "NA-US-LosAngeles (USLA)",
+      "starting_address": "10.40.32.1",
+      "ending_address": "10.40.63.254"
+    },
+    {
+      "id": 49,
+      "name": "NA-US-LosAngeles (USLA)-2",
+      "starting_address": "172.17.16.1",
+      "ending_address": "172.17.16.254"
+    },
+    {
+      "id": 50,
+      "name": "NA-US-Miami (USMI)",
+      "starting_address": "10.40.192.1",
+      "ending_address": "10.40.196.254"
+    },
+    {
+      "id": 51,
+      "name": "NA-US -Miami (USMI)",
+      "starting_address": "172.17.64.1",
+      "ending_address": "172.17.64.254"
+    },
+    {
+      "id": 52,
+      "name": "NA-US-NewYork (USNY)",
+      "starting_address": "10.40.128.1",
+      "ending_address": "10.40.159.254"
+    },
+    {
+      "id": 53,
+      "name": "NA-US-NewYork (USNY)-2",
+      "starting_address": "172.17.24.0",
+      "ending_address": "172.17.26.255"
+    },
+    {
+      "id": 54,
+      "name": "NA-US-NewYork (USNY)-3",
+      "starting_address": "172.17.28.0",
+      "ending_address": "172.17.30.254"
+    },
+    {
+      "id": 55,
+      "name": "APAC-Australia-Sydney (AUSY)",
+      "starting_address": "10.132.0.0",
+      "ending_address": "10.132.255.254"
+    },
+    {
+      "id": 56,
+      "name": "APAC-China-Beijing (CNBJ)",
+      "starting_address": "10.140.131.0",
+      "ending_address": "10.140.132.254"
+    },
+    {
+      "id": 57,
+      "name": "APAC-China-Dongguan (CNDG)",
+      "starting_address": "10.140.99.0",
+      "ending_address": "10.140.99.254"
+    },
+    {
+      "id": 59,
+      "name": "APAC-China-Pulsetime (CNGM)-2",
+      "starting_address": "10.140.195.0",
+      "ending_address": "10.140.196.254"
+    },
+    {
+      "id": 60,
+      "name": "APAC-China-Pulsetime (CNGM)-3",
+      "starting_address": "10.140.200.0",
+      "ending_address": "10.140.200.254"
+    },
+    {
+      "id": 61,
+      "name": "APAC-China-Pulsetime (CNGM)-4",
+      "starting_address": "10.140.207.0",
+      "ending_address": "10.140.208.254"
+    },
+    {
+      "id": 62,
+      "name": "APAC-China-Pulsetime (CNGM)-5",
+      "starting_address": "10.140.210.0",
+      "ending_address": "10.140.210.254"
+    },
+    {
+      "id": 63,
+      "name": "APAC-China-HongKong (CNHK)",
+      "starting_address": "10.128.0.0",
+      "ending_address": "10.128.255.254"
+    },
+    {
+      "id": 64,
+      "name": "APAC-China-HongKong (CNHK)-2",
+      "starting_address": "10.130.0.0",
+      "ending_address": "10.130.255.254"
+    },
+    {
+      "id": 65,
+      "name": "APAC-China-HongKong (CNHK)-3",
+      "starting_address": "10.148.0.0",
+      "ending_address": "10.148.2.254"
+    },
+    {
+      "id": 66,
+      "name": "APAC-China-HongKong (CNHK)-4",
+      "starting_address": "172.25.0.0",
+      "ending_address": "172.25.255.254"
+    },
+    {
+      "id": 67,
+      "name": "APAC-China-Shanghai (CNSH)",
+      "starting_address": "10.140.163.0",
+      "ending_address": "10.140.163.254"
+    },
+    {
+      "id": 68,
+      "name": "APAC-China-Shanghai (CNSH)-2",
+      "starting_address": "10.140.167.1",
+      "ending_address": "10.140.167.254"
+    },
+    {
+      "id": 69,
+      "name": "APAC-China-Shanghai (CNSH)-3",
+      "starting_address": "10.140.32.1",
+      "ending_address": "10.140.63.254"
+    },
+    {
+      "id": 70,
+      "name": "APAC-China-Shanghai (CNSH)-4",
+      "starting_address": "172.26.0.1",
+      "ending_address": "172.26.0.254"
+    },
+    {
+      "id": 71,
+      "name": "APAC-China-Shenzhen (CNSZ)",
+      "starting_address": "10.140.67.0",
+      "ending_address": "10.140.71.254"
+    },
+    {
+      "id": 72,
+      "name": "APAC-India- (INBR)",
+      "starting_address": "10.134.0.0",
+      "ending_address": "10.134.255.254"
+    },
+    {
+      "id": 73,
+      "name": "APAC-Japan-Tokyo (JPTK)",
+      "starting_address": "10.133.9.0",
+      "ending_address": "10.133.9.254"
+    },
+    {
+      "id": 74,
+      "name": "APAC-Japan-Tokyo (JPTK)-1",
+      "starting_address": "10.136.0.0",
+      "ending_address": "10.136.255.254"
+    },
+    {
+      "id": 75,
+      "name": "APAC-Korea-Seoul (KRSL)",
+      "starting_address": "10.138.0.0",
+      "ending_address": "10.138.255.254"
+    },
+    {
+      "id": 76,
+      "name": "APAC-Malaysia-KualaLumpur (MYKL)",
+      "starting_address": "10.142.0.0",
+      "ending_address": "10.142.255.254"
+    },
+    {
+      "id": 77,
+      "name": "APAC-Malaysia-KualaLumpur (MYKL)-2",
+      "starting_address": "172.26.20.0",
+      "ending_address": "172.26.20.254"
+    },
+    {
+      "id": 78,
+      "name": "APAC-Malaysia-KualaLumpur (MYKL)-3",
+      "starting_address": "172.26.6.0",
+      "ending_address": "172.26.10.254"
+    },
+    {
+      "id": 79,
+      "name": "APAC-Singapore-Singapore (SGSG)",
+      "starting_address": "10.144.0.0",
+      "ending_address": "10.144.255.254"
+    },
+    {
+      "id": 80,
+      "name": "APAC-Taiwan-Taipei (TWTP)",
+      "starting_address": "10.146.0.0",
+      "ending_address": "10.146.255.254"
+    },
+    {
+      "id": 81,
+      "name": "NA-US-Fall Creek (USFC)",
+      "starting_address": "10.2.0.0",
+      "ending_address": "10.2.255.254"
+    },
+    {
+      "id": 82,
+      "name": "NA-US-Richardson (USRC) [Other]",
+      "starting_address": "10.10.35.2",
+      "ending_address": "10.10.35.255"
+    },
+    {
+      "id": 83,
+      "name": "NA-US-Richardson (USRC)-2",
+      "starting_address": "10.4.0.0",
+      "ending_address": "10.4.255.254"
+    },
+    {
+      "id": 84,
+      "name": "NA-US-Richardson (USRC)-3",
+      "starting_address": "172.16.0.0",
+      "ending_address": "172.16.255.254"
+    },
+    {
+      "id": 85,
+      "name": "NA-US-Richardson (USRC)-4",
+      "starting_address": "172.22.0.0",
+      "ending_address": "172.22.255.254"
+    },
+    {
+      "id": 86,
+      "name": "NA-US-Richardson (USRC)-5",
+      "starting_address": "172.28.0.0",
+      "ending_address": "172.28.255.254"
+    },
+    {
+      "id": 87,
+      "name": "NA-US-Richardson (USRC)-6",
+      "starting_address": "172.29.0.0",
+      "ending_address": "172.31.255.254"
+    },
+    {
+      "id": 88,
+      "name": "NA-US-SAVVIS (USSA)",
+      "starting_address": "10.15.0.0",
+      "ending_address": "10.15.255.254"
+    },
+    {
+      "id": 89,
+      "name": "NA-US-Sunguard (USSU)",
+      "starting_address": "10.60.15.0",
+      "ending_address": "10.60.15.254"
+    },
+    {
+      "id": 90,
+      "name": "NA-US-Sunguard (USSU)-2",
+      "starting_address": "10.60.25.0",
+      "ending_address": "10.60.25.255"
+    },
+    {
+      "id": 91,
+      "name": "NA-US-Sunguard (USSU)-3",
+      "starting_address": "10.60.6.0",
+      "ending_address": "10.60.10.254"
+    },
+    {
+      "id": 92,
+      "name": "NA-US-Bentonville (USBE)",
+      "starting_address": "172.17.56.1",
+      "ending_address": "172.17.56.254"
+    },
+    {
+      "id": 93,
+      "name": "NA-US-RetroDome (USRD)",
+      "starting_address": "10.8.0.1",
+      "ending_address": "10.8.255.254"
+    },
+    {
+      "id": 94,
+      "name": "NA-US-RetroDome (USRD)-2",
+      "starting_address": "172.17.2.0",
+      "ending_address": "172.17.2.254"
+    },
+    {
+      "id": 95,
+      "name": "NA-US-RetroDome (USRD)-3",
+      "starting_address": "172.27.0.0",
+      "ending_address": "172.27.14.254"
+    },
+    {
+      "id": 96,
+      "name": ".Offsite (Home Network)",
+      "starting_address": "192.168.0.0",
+      "ending_address": "192.168.255.254"
+    },
+    {
+      "id": 97,
+      "name": ".LinkLocal",
+      "starting_address": "169.254.1.0",
+      "ending_address": "169.254.254.255"
+    },
+    {
+      "id": 98,
+      "name": ".DMZ - NA - Richardson",
+      "starting_address": "12.37.59.0",
+      "ending_address": "12.37.59.255"
+    },
+    {
+      "id": 99,
+      "name": "EMEA-Switzerland-Basel (CHBS) - 4",
+      "starting_address": "172.19.97.1",
+      "ending_address": "172.19.101.254"
+    },
+    {
+      "id": 100,
+      "name": "EMEA-Austria-Salzburg (ATSA)-2",
+      "starting_address": "172.19.148.0",
+      "ending_address": "172.19.148.254"
+    },
+    {
+      "id": 101,
+      "name": "EMEA-Spain-Barcelona (ESBA)-2",
+      "starting_address": "10.10.99.1",
+      "ending_address": "10.10.99.254"
+    },
+    {
+      "id": 102,
+      "name": "NA-US-Richardson (USRC)-7",
+      "starting_address": "10.10.100.0",
+      "ending_address": "10.10.255.254"
+    },
+    {
+      "id": 103,
+      "name": "NA-US-SanFrancisco (USSF)",
+      "starting_address": "10.40.197.1",
+      "ending_address": "10.40.199.255"
+    },
+    {
+      "id": 104,
+      "name": "APAC-China-Shenzhen-Nanshan (CNNS)",
+      "starting_address": "10.140.227.0",
+      "ending_address": "10.140.231.254"
+    },
+    {
+      "id": 105,
+      "name": "APAC-Vietnam-HoCiMinh (VNHC)-1",
+      "starting_address": "10.148.3.0",
+      "ending_address": "10.148.7.254"
+    },
+    {
+      "id": 106,
+      "name": "APAC-Vietnam-HoCiMinh (VNHC)-2",
+      "starting_address": "10.166.40.0",
+      "ending_address": "10.166.90.255"
+    },
+    {
+      "id": 107,
+      "name": "APAC-Vietnam-HoCiMinh (VNHC)-3",
+      "starting_address": "10.148.25.0",
+      "ending_address": "10.148.25.255"
+    },
+    {
+      "id": 108,
+      "name": "APAC-China-Dongguan (CNDG) - 2",
+      "starting_address": "10.140.103.0",
+      "ending_address": "10.140.104.254"
+    },
+    {
+      "id": 109,
+      "name": "APAC-China-Beijing (CNBJ) - 2",
+      "starting_address": "10.140.135.0",
+      "ending_address": "10.140.135.254"
+    },
+    {
+      "id": 110,
+      "name": "NA-US-Richardson (USRC) [Lower Level]",
+      "starting_address": "10.10.30.2",
+      "ending_address": "10.10.32.255"
+    },
+    {
+      "id": 111,
+      "name": "NA-US-Richardson (USRC) [1st Floor - SE]",
+      "starting_address": "10.10.33.2",
+      "ending_address": "10.10.33.255"
+    },
+    {
+      "id": 112,
+      "name": "NA-US-Richardson (USRC) [1st Floor - SW]",
+      "starting_address": "10.10.34.2",
+      "ending_address": "10.10.34.255"
+    },
+    {
+      "id": 113,
+      "name": "NA-US-Richardson (USRC) [1st Floor - NW]",
+      "starting_address": "10.10.36.2",
+      "ending_address": "10.10.36.255"
+    },
+    {
+      "id": 114,
+      "name": "NA-US-Richardson (USRC) [1st Floor - NE]",
+      "starting_address": "10.10.37.2",
+      "ending_address": "10.10.37.255"
+    },
+    {
+      "id": 115,
+      "name": "NA-US-Richardson (USRC) [2nd Floor - SE]",
+      "starting_address": "10.10.38.2",
+      "ending_address": "10.10.39.255"
+    },
+    {
+      "id": 116,
+      "name": "NA-US-Richardson (USRC) [2nd Floor - SW]",
+      "starting_address": "10.10.40.2",
+      "ending_address": "10.10.40.255"
+    },
+    {
+      "id": 117,
+      "name": "NA-US-Richardson (USRC) [2nd Floor - SE #2]",
+      "starting_address": "10.10.47.2",
+      "ending_address": "10.10.47.255"
+    },
+    {
+      "id": 118,
+      "name": "NA-US-Richardson (USRC) [Lower Level #2]",
+      "starting_address": "10.10.45.2",
+      "ending_address": "10.10.45.255"
+    },
+    {
+      "id": 119,
+      "name": "NA-US-Richardson (USRC) [3rd Floor - SE]",
+      "starting_address": "10.10.41.2",
+      "ending_address": "10.10.42.255"
+    },
+    {
+      "id": 120,
+      "name": "NA-US-Richardson (USRC) [3rd Floor - SW]",
+      "starting_address": "10.10.43.2",
+      "ending_address": "10.10.43.255"
+    },
+    {
+      "id": 121,
+      "name": "NA-US-Richardson (USRC) [3rd Floor - SW #2]",
+      "starting_address": "10.10.46.2",
+      "ending_address": "10.10.46.255"
+    },
+    {
+      "id": 122,
+      "name": "NA-US-Richardson (USRC) [All]",
+      "starting_address": "10.10.0.0",
+      "ending_address": "10.10.50.255"
+    },
+    {
+      "id": 123,
+      "name": "NA-US-RetroDome (USRD)-4",
+      "starting_address": "172.17.5.0",
+      "ending_address": "172.17.5.254"
+    },
+    {
+      "id": 124,
+      "name": "NA-US -Miami (USMI) - NetMgmt",
+      "starting_address": "10.40.224.0",
+      "ending_address": "10.40.224.255"
+    },
+    {
+      "id": 125,
+      "name": "NA-US -Miami (USMI) - Users",
+      "starting_address": "10.40.227.0",
+      "ending_address": "10.40.227.255"
+    },
+    {
+      "id": 126,
+      "name": "NA-US -Miami (USMI) - VOIP",
+      "starting_address": "10.40.228.0",
+      "ending_address": "10.40.228.255"
+    },
+    {
+      "id": 127,
+      "name": "NA-US -Miami (USMI) - Server",
+      "starting_address": "10.40.233.0",
+      "ending_address": "10.40.233.255"
+    },
+    {
+      "id": 128,
+      "name": "NA-US-SanFrancisco (USSF)-2",
+      "starting_address": "10.50.36.1",
+      "ending_address": "10.50.36.255"
+    },
+    {
+      "id": 129,
+      "name": "EMEA-France-Monswiller (FRMO)-3",
+      "starting_address": "10.85.4.1",
+      "ending_address": "10.85.4.254"
+    },
+    {
+      "id": 130,
+      "name": "NA-US-Richardson (USRC) [Other] - 2",
+      "starting_address": "10.10.90.1",
+      "ending_address": "10.10.94.254"
+    },
+    {
+      "id": 131,
+      "name": "NA-US-SanFrancisco (USSF)-3",
+      "starting_address": "10.50.32.1",
+      "ending_address": "10.50.32.255"
+    },
+    {
+      "id": 132,
+      "name": "NA-US-SanFrancisco (USSF)-4",
+      "starting_address": "10.50.42.1",
+      "ending_address": "10.50.42.255"
+    },
+    {
+      "id": 133,
+      "name": "NA-US-SanFrancisco (USSF)-5",
+      "starting_address": "10.50.37.1",
+      "ending_address": "10.50.37.254"
+    }
+  ]
+}
