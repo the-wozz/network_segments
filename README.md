@@ -1,6 +1,7 @@
 ## What this does:<br>
-Grabs the IP of the machine and compares it to a JSON file of 'network segments' to check where the device is located and 'echos' the location. The idea behind this is to be able to export the 'Network Segments' from Jamf Pro and use that same information elsewhere. 
+Grabs the IP of the machine and compares it to a JSON file of 'network segments' to check where the device is located and 'echoes' the location. The idea behind this is to be able to export the 'Network Segments' from Jamf Pro and use that same information elsewhere. 
 
+# How to Use<br>
 ## Editable variables:<br>
 MODIFY Line 13: inputFile="LOCAL FILE OR URL" <br>to either a local .json file or an online location that ends in .json format (like GitHub Raw)
 
