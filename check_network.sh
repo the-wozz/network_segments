@@ -5,16 +5,20 @@
 # Author: Zachary 'Woz'nicki
 
 # variables
-version="1.0"
+version="1.1"
 echo "Script version: $version" 
-date="07/25/24"
+date="08/12/24"
 echo "Last modified: $date"
 # file containing all the network segments and locations. can be hosted online or locally but MUST BE in json format!
 inputFile="https://raw.githubusercontent.com/the-wozz/network_segments/main/test.json"
 # gets IP of currently in-use network device
 ipAddress=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+# renames machine based on location, it prefixes the machine name with location-serialnumber | 1 = rename 0 = disabled
+renameMachine=0
 # enable more verbose logging to diagnose any possible issues
 verboseMode=0 ;if [ $verboseMode -eq 1 ]; then echo "VERBOSE MODE: Enabled"; fi
+# grabs serial number
+serialNumber=$(/usr/sbin/system_profiler SPHardwareDataType | awk '/Serial/ {print $4}')
 # end variables
 
 ## extra processing
@@ -86,6 +90,7 @@ findNetworkSegment() {
             #echo "starting_address: $ipRange"
         ipRangeMax=$(/usr/bin/plutil -extract "network_segments".$i."ending_address" raw "$inputFile")
             #echo "ending_address: $ipRange2"
+        locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
 
             ipMin=$(int_IP "$ipRangeMin")
             ipMax=$(int_IP "$ipRangeMax")
@@ -105,7 +110,49 @@ findNetworkSegment() {
 
 # SoS
     findNetworkSegment
-echo "result: $result"
+echo "Location: $result"
+
+    # this section renames a machine to the network segment name-serial number IF the 'renameMachine' variable is set to 1
+    if [[ "$renameMachine" -eq 1 ]]; then
+        echo "INFO: Rename Machine is ON!"
+
+        locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
+            echo "Renaming machine to: $locName-$serialNumber"
+
+            hostName=$(scutil --get HostName)
+            if [[ $hostName == "$locName-$serialNumber" ]]; then
+                echo "HostName = Good set!"
+            else
+                echo "HostName is NOT $locName-$serialNumber"
+                echo "Setting 'HostName'..."
+                scutil --set HostName "$locName-$serialNumber"
+                    if [[ $hostName == "$locName-$serialNumber" ]]; then
+                        echo "HostName = Good set!"
+                    fi
+            fi
+            computerName=$(scutil --get ComputerName)
+            if [[ $computerName == "$locName-$serialNumber" ]]; then
+                echo "ComputerName = Good set!"
+            else
+                echo "ComputerName is NOT $locName-$serialNumber"
+                echo "Setting 'ComputerName'..."
+                scutil --set ComputerName "$locName-$serialNumber"
+                    if [[ $computerName == "$locName-$serialNumber" ]]; then
+                        echo "ComputerName = Good set!"
+                    fi
+            fi
+            localHostName=$(scutil --get LocalHostName)
+            if [[ $localHostName == "$locName-$serialNumber" ]]; then
+                echo "LocalHostName = Good set!"
+            else
+                echo "LocalHostName is NOT $locName-$serialNumber"
+                echo "Setting LocalHostName..."
+                scutil --set LocalHostName "$locName-$serialNumber"
+                    if [[ $localHostName == "$locName-$serialNumber" ]]; then
+                        echo "LocalHostName = Good set!"
+                    fi
+            fi
+    fi
     if [ "$removeLater" -eq 1 ]; then rm -rf "$temp_file"; fi
     exit 0
 # EoS
