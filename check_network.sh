@@ -128,6 +128,8 @@ echo "Location: $result"
                 scutil --set HostName "$locName-$serialNumber"
                     if [[ $hostName == "$locName-$serialNumber" ]]; then
                         echo "HostName = Good set!"
+                    else
+                        echo "HostName = NEEDS ATTENTION!"
                     fi
             fi
             computerName=$(scutil --get ComputerName)
@@ -139,6 +141,8 @@ echo "Location: $result"
                 scutil --set ComputerName "$locName-$serialNumber"
                     if [[ $computerName == "$locName-$serialNumber" ]]; then
                         echo "ComputerName = Good set!"
+                    else
+                        echo "ComputerName = NEEDS ATTENTION!"
                     fi
             fi
             localHostName=$(scutil --get LocalHostName)
@@ -150,6 +154,8 @@ echo "Location: $result"
                 scutil --set LocalHostName "$locName-$serialNumber"
                     if [[ $localHostName == "$locName-$serialNumber" ]]; then
                         echo "LocalHostName = Good set!"
+                    else
+                        echo "LocalHostName = NEEDS ATTENTION!"
                     fi
             fi
     fi
