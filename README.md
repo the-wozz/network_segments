@@ -3,7 +3,7 @@ Grabs the IP of the machine and compares it to a JSON file of 'network segments'
 
 # How to Use<br>
 ## Editable variables:<br>
-MODIFY Line 13: inputFile="LOCAL FILE OR URL" <br>to either a local .json file or an online location that ends in .json format (like GitHub Raw)
+MODIFY Line 13: inputFile="LOCAL FILE OR URL" <br>to either a local .json file or an online location that ends in .json format (like GitHub Raw)<br><br>
 MODIFY Line 17: renameMachine=1/0 IF set to 1, the device will be renamed to prefix the name within the parenthesis in the JSON file of the 'Name' key along with serial after. Example: USA-12345689
 
 
