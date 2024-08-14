@@ -554,19 +554,19 @@
     },
     {
       "id": 96,
-      "name": ".Offsite (Home Network)",
+      "name": ".Offsite (HOME)",
       "starting_address": "192.168.0.0",
       "ending_address": "192.168.255.254"
     },
     {
       "id": 97,
-      "name": ".LinkLocal",
+      "name": ".LinkLocal (LOCAL)",
       "starting_address": "169.254.1.0",
       "ending_address": "169.254.254.255"
     },
     {
       "id": 98,
-      "name": ".DMZ - NA - Richardson",
+      "name": ".DMZ - NA - Richardson (NARI)",
       "starting_address": "12.37.59.0",
       "ending_address": "12.37.59.255"
     },
