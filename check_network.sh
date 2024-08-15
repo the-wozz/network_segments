@@ -5,16 +5,16 @@
 # Author: Zachary 'Woz'nicki
 
 # variables
-version="1.1"
+version="1.2"
 echo "Script version: $version" 
-date="08/12/24"
+date="08/15/24"
 echo "Last modified: $date"
 # file containing all the network segments and locations. can be hosted online or locally but MUST BE in json format!
 inputFile="https://raw.githubusercontent.com/the-wozz/network_segments/main/test.json"
 # gets IP of currently in-use network device
 ipAddress=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 # renames machine based on location, it prefixes the machine name with location-serialnumber | 1 = rename 0 = disabled
-renameMachine=0
+renameMachine=1
 # enable more verbose logging to diagnose any possible issues
 verboseMode=0 ;if [ $verboseMode -eq 1 ]; then echo "VERBOSE MODE: Enabled"; fi
 # grabs serial number
@@ -115,44 +115,53 @@ echo "Location: $result"
     # this section renames a machine to the network segment name-serial number IF the 'renameMachine' variable is set to 1
     if [[ "$renameMachine" -eq 1 ]]; then
         echo "INFO: Rename Machine is ON!"
+        
+        machineType=$(system_profiler SPHardwareDataType | grep 'Model Name: ' | tr -d " \t\n\r" | cut -d ':' -f 2)
+            if [[ $machineType =~ .*Book.* ]]; then
+                echo "INFO: Machine is a 'Laptop'! Prefixing with 'LT'..."
+                prefix=LT
+            else
+                echo "INFO: Machine is a 'Desktop'! Prefixing with 'DM'..."
+                prefix=DM
+            fi
 
         locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
-            echo "Renaming machine to: $locName-$serialNumber"
+            echo "Renaming machine to: $prefix$locName$serialNumber"
 
             hostName=$(scutil --get HostName)
-            if [[ $hostName == "$locName-$serialNumber" ]]; then
+            if [[ $hostName == "$prefix$locName$serialNumber" ]]; then
                 echo "HostName = Good set!"
             else
-                echo "HostName is NOT $locName-$serialNumber"
+                echo "HostName is NOT $prefix$locName$serialNumber"
                 echo "Setting 'HostName'..."
-                scutil --set HostName "$locName-$serialNumber"
-                    if [[ $hostName == "$locName-$serialNumber" ]]; then
+                scutil --set HostName "$prefix$locName$serialNumber"
+                    if [[ $hostName == "$prefix$locName$serialNumber" ]]; then
                         echo "HostName = Good set!"
                     else
                         echo "HostName = NEEDS ATTENTION!"
                     fi
             fi
             computerName=$(scutil --get ComputerName)
-            if [[ $computerName == "$locName-$serialNumber" ]]; then
+            if [[ $computerName == "$prefix$locName$serialNumber" ]]; then
                 echo "ComputerName = Good set!"
             else
-                echo "ComputerName is NOT $locName-$serialNumber"
+                echo "ComputerName is NOT $prefix$locName$serialNumber"
                 echo "Setting 'ComputerName'..."
-                scutil --set ComputerName "$locName-$serialNumber"
-                    if [[ $computerName == "$locName-$serialNumber" ]]; then
+                scutil --set ComputerName "$prefix$locName$serialNumber"
+                    if [[ $computerName == "$prefix$locName$serialNumber" ]]; then
                         echo "ComputerName = Good set!"
                     else
                         echo "ComputerName = NEEDS ATTENTION!"
                     fi
             fi
             localHostName=$(scutil --get LocalHostName)
-            if [[ $localHostName == "$locName-$serialNumber" ]]; then
+            if [[ $localHostName == "$prefix$locName$serialNumber" ]]; then
                 echo "LocalHostName = Good set!"
             else
-                echo "LocalHostName is NOT $locName-$serialNumber"
+                echo "LocalHostName is NOT $prefix$locName$serialNumber"
                 echo "Setting LocalHostName..."
-                scutil --set LocalHostName "$locName-$serialNumber"
-                    if [[ $localHostName == "$locName-$serialNumber" ]]; then
+                scutil --set LocalHostName "$prefix$locName$serialNumber"
+                    if [[ $localHostName == "$prefix$locName$serialNumber" ]]; then
                         echo "LocalHostName = Good set!"
                     else
                         echo "LocalHostName = NEEDS ATTENTION!"
