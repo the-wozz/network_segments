@@ -5,9 +5,9 @@
 # Author: Zachary 'Woz'nicki
 
 # variables
-version="1.2"
+version="1.3"
 echo "Script version: $version" 
-date="08/15/24"
+date="09/3/24"
 echo "Last modified: $date"
 # file containing all the network segments and locations. can be hosted online or locally but MUST BE in json format!
 inputFile="https://raw.githubusercontent.com/the-wozz/network_segments/main/test.json"
@@ -90,7 +90,6 @@ findNetworkSegment() {
             #echo "starting_address: $ipRange"
         ipRangeMax=$(/usr/bin/plutil -extract "network_segments".$i."ending_address" raw "$inputFile")
             #echo "ending_address: $ipRange2"
-        locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
 
             ipMin=$(int_IP "$ipRangeMin")
             ipMax=$(int_IP "$ipRangeMax")
@@ -106,16 +105,24 @@ findNetworkSegment() {
             fi
     done # end loop
 }
-### end functions
 
-# SoS
-    findNetworkSegment
-echo "Location: $result"
-
+renameMachineFunc() {
     # this section renames a machine to the network segment name-serial number IF the 'renameMachine' variable is set to 1
     if [[ "$renameMachine" -eq 1 ]]; then
         echo "INFO: Rename Machine is ON!"
         
+        # gathering Location Short Name
+        locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
+            echo "Location short name: $locName"
+                # new check added 9/3/24
+                echo "Location Short Name Legnth: ${#locName}"
+                if [ ${#locName} -gt 4 ]; then 
+                    locName="WRLD"
+                    echo "ERROR: 'Location Name (locName)' too big! Setting to default: $locName."
+                else 
+                    echo "STATUS: Good location name!"
+                fi
+
         machineType=$(system_profiler SPHardwareDataType | grep 'Model Name: ' | tr -d " \t\n\r" | cut -d ':' -f 2)
             if [[ $machineType =~ .*Book.* ]]; then
                 echo "INFO: Machine is a 'Laptop'! Prefixing with 'LT'..."
@@ -125,7 +132,6 @@ echo "Location: $result"
                 prefix=DM
             fi
 
-        locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
             echo "Renaming machine to: $prefix$locName$serialNumber"
 
             hostName=$(scutil --get HostName)
@@ -168,6 +174,14 @@ echo "Location: $result"
                     fi
             fi
     fi
+}
+### end functions
+
+# SoS
+    findNetworkSegment
+echo "Location: $result"
+    renameMachineFunc
+
     if [ "$removeLater" -eq 1 ]; then rm -rf "$temp_file"; fi
     exit 0
 # EoS
