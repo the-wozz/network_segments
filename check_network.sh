@@ -125,8 +125,8 @@ renameMachineFunc() {
 
         machineType=$(system_profiler SPHardwareDataType | grep 'Model Name: ' | tr -d " \t\n\r" | cut -d ':' -f 2)
             if [[ $machineType =~ .*Book.* ]]; then
-                echo "INFO: Machine is a 'Laptop'! Prefixing with 'LT'..."
-                prefix=LT
+                echo "INFO: Machine is a 'Laptop'! Prefixing with 'LM'..."
+                prefix=LM
             else
                 echo "INFO: Machine is a 'Desktop'! Prefixing with 'DM'..."
                 prefix=DM
