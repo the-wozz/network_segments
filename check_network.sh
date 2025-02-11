@@ -5,9 +5,9 @@
 # Author: Zachary 'Woz'nicki
 
 # variables
-version="1.3"
+version="1.6"
 echo "Script version: $version" 
-date="09/3/24"
+date="02/11/25"
 echo "Last modified: $date"
 # file containing all the network segments and locations. can be hosted online or locally but MUST BE in json format!
 inputFile="https://raw.githubusercontent.com/the-wozz/network_segments/main/test.json"
@@ -19,6 +19,12 @@ renameMachine=1
 verboseMode=0 ;if [ $verboseMode -eq 1 ]; then echo "VERBOSE MODE: Enabled"; fi
 # grabs serial number
 serialNumber=$(/usr/sbin/system_profiler SPHardwareDataType | awk '/Serial/ {print $4}')
+# set Swift Dialog icon
+swiftIcon=""
+# Swift Dialog location (default)
+swiftDialogBin=/usr/local/bin/dialog
+# Swift Dialog Github URL (always check for latest https://github.com/swiftDialog/swiftDialog/releases/ )
+swiftDialogURL="https://github.com/swiftDialog/swiftDialog/releases/download/v2.5.5/dialog-2.5.5-4802.pkg"
 # end variables
 
 ## extra processing
@@ -36,7 +42,7 @@ serialNumber=$(/usr/sbin/system_profiler SPHardwareDataType | awk '/Serial/ {pri
         echo "INFO: URL detected in inputFile! Processing..."
         echo "Checking URL: $inputFile"
             sleep 3
-        if curl -o /dev/null -s -I -f "$inputFile"; then
+        if /usr/bin/curl -o /dev/null -s -I -f "$inputFile"; then
             echo "PASS: URL valid!"
         else
             echo "ERROR: URL unreachable!"
@@ -65,6 +71,8 @@ serialNumber=$(/usr/sbin/system_profiler SPHardwareDataType | awk '/Serial/ {pri
 ## end extra processing
 
 ### functions
+
+# grabs the current IP
 # courtesy of Pedro Weinzettel from stackexchange for 'int_IP' function
 int_IP() {
     OIFS=$IFS
@@ -72,6 +80,70 @@ int_IP() {
     ip=($1)
     IFS=$OIFS
     echo "${ip[0]} * 256 ^ 3 + ${ip[1]} * 256 ^2 + ${ip[2]} * 256 ^1 + ${ip[3]} * 256 ^ 0" | bc
+}
+
+# checks if Swift Dialog is installed AND the version desired, if older, deletes and then calls the download function
+swiftDialogCheck() {
+    echo "* SWIFT DIALOG CHECK *"
+        if [[ ! -e "$swiftDialogBin" ]]; then
+            echo "Swift Dialog NOT FOUND! Unable to prompt user."
+        else
+            echo "INITIAL CHECK PASSED: Swift Dialog found. Checking version..."
+            swiftDInstalledVersion=$("$swiftDialogBin" --version | cut -c1-5)
+            echo "Swift Dialog version: $swiftDInstalledVersion"
+                if [[ "$swiftDInstalledVersion" < "$swiftVersion" ]]; then
+                    echo "Swift Dialog version too old! $swiftVersion required."
+                            # these commands make sure that any currently open Swift Dialog prompt is closed
+                            /bin/echo quit: >> /var/tmp/dialog.log
+                            pkill -f dialog
+                            echo "Using Github as download source"
+                            downloadSwiftDialog
+                                #wait
+                            #echo "*** ERROR: Unable to prompt user because of Swift Dialog failure above ***"
+                            #exit 1
+                else
+                    echo "* Swift Dialog version PASSED *"
+                fi
+        fi
+}
+
+# downloads Swift Dialog via GitHub
+downloadSwiftDialog(){
+    echo "* SWIFT DIALOG: Flagged for DOWNLOAD! *"
+
+    if [[ -n "$swiftDialogURL" ]]; then
+        echo "SWIFT DIALOG: URL Provided: $swiftDialogURL"
+
+        local filename
+            filename=$(basename "$swiftDialogURL")
+        local temp_file
+            temp_file="/tmp/$filename"
+        previous_umask=$(umask)
+        umask 077
+
+        /usr/bin/curl --retry 5 --retry-max-time 120 -Ls "$swiftDialogURL" -o "$temp_file" 2>&1
+            if [[ $? -eq 0 ]]; then
+                echo "SWIFT DIALOG: DOWNLOADED successfully! Installing..."
+                        /usr/sbin/installer -verboseR -pkg "$temp_file" -target / 2>&1
+                            if [[ $? -eq 0 ]]; then
+                                echo "SWIFT DIALOG: INSTALLED!"
+                            else
+                                echo "**** ERROR: SWIFT DIALOG: Unable to instal! Can NOT continue! Exiting... *****"
+                                exit 1
+                            fi
+
+                rm -Rf "${temp_file}" >/dev/null 2>&1
+                umask "${previous_umask}"
+                return
+            else
+                echo "**** ERROR: SWIFT DIALOG: Download FAILED!! Can NOT continue! Exiting... *****"
+                exit 1
+            fi
+    else
+        echo "* SWIFT DIALOG: ERROR: NO swiftDialogURL provided! *"
+        echo "Exiting..."
+        exit 1
+    fi
 }
 
 # loop to go through all individual entries in the input file
@@ -106,24 +178,45 @@ findNetworkSegment() {
     done # end loop
 }
 
+# renames a machine to the network segment name-serial number IF the 'renameMachine' variable is set to 1
 renameMachineFunc() {
-    # this section renames a machine to the network segment name-serial number IF the 'renameMachine' variable is set to 1
     if [[ "$renameMachine" -eq 1 ]]; then
         echo "INFO: Rename Machine is ON!"
         
         # gathering Location Short Name
         locName=$(/usr/bin/plutil -extract "network_segments".$i."name" raw "$inputFile" | cut -d "(" -f2 | cut -d ")" -f1 )
             echo "Location short name: $locName"
-                # new check added 9/3/24
                 echo "Location Short Name Legnth: ${#locName}"
-                if [ ${#locName} -gt 4 ]; then 
-                    locName="WRLD"
-                    echo "ERROR: 'Location Name (locName)' too big! Setting to default: $locName."
+                if [ ${#locName} != 4 ]; then
+                    echo "ERROR: 'Location Name (locName)' too big! Prompting user for location via Swift Dialog..."
+                    locName=$($swiftDialogBin -i "$swiftIcon" -o -p --small -t "Location Name" --messagefont size="15" -m "Input location name in 4 characters or less." --alignment center --textfield "",required,regex="^[A-Z]{4}$",regexerror="Location MUST be 4 LETTERS and ALL CAPITAL." --buton1text "Submit")
+                        case $? in
+                        0)
+                            echo "User inputted location: $locName"
+                            # OLD LOGIC used to determine if variable was too long WITHOUT regex (= x_x)
+                            # if [ "${#newName}" -ge 5 ]; then
+                            #     echo "*** ERROR : New name TOO LONG! ***"
+                            #     renameMachineFunc
+                            # else
+                            #     echo "NEW Location: $newName"
+                            #     return
+                            # fi
+                        ;;
+                        2)
+                            echo "User pressed Exit button"
+                            exit 0
+                        ;;
+                        *)
+                            echo "Something unexpected occured"
+                            exit 1
+                        ;;
+                    esac
                 else 
                     echo "STATUS: Good location name!"
                 fi
 
-        machineType=$(system_profiler SPHardwareDataType | grep 'Model Name: ' | tr -d " \t\n\r" | cut -d ':' -f 2)
+        # gather if machine is a laptop or desktop
+        machineType=$(/usr/sbin/system_profiler SPHardwareDataType | grep 'Model Name: ' | tr -d " \t\n\r" | cut -d ':' -f 2)
             if [[ $machineType =~ .*Book.* ]]; then
                 echo "INFO: Machine is a 'Laptop'! Prefixing with 'LM'..."
                 prefix=LM
@@ -134,39 +227,43 @@ renameMachineFunc() {
 
             echo "Renaming machine to: $prefix$locName$serialNumber"
 
-            hostName=$(scutil --get HostName)
+        # check and rename of all the proper 'names (host name, computer name, and local host name)'
+            hostName=$(/usr/sbin/scutil --get HostName)
             if [[ $hostName == "$prefix$locName$serialNumber" ]]; then
                 echo "HostName = Good set!"
             else
                 echo "HostName is NOT $prefix$locName$serialNumber"
                 echo "Setting 'HostName'..."
-                scutil --set HostName "$prefix$locName$serialNumber"
+                /usr/sbin/scutil --set HostName "$prefix$locName$serialNumber"
+                sleep 1
                     if [[ $hostName == "$prefix$locName$serialNumber" ]]; then
                         echo "HostName = Good set!"
                     else
                         echo "HostName = NEEDS ATTENTION!"
                     fi
             fi
-            computerName=$(scutil --get ComputerName)
+            computerName=$(/usr/sbin/scutil --get ComputerName)
             if [[ $computerName == "$prefix$locName$serialNumber" ]]; then
                 echo "ComputerName = Good set!"
             else
                 echo "ComputerName is NOT $prefix$locName$serialNumber"
                 echo "Setting 'ComputerName'..."
-                scutil --set ComputerName "$prefix$locName$serialNumber"
+                /usr/sbin/scutil --set ComputerName "$prefix$locName$serialNumber"
+                sleep 1
                     if [[ $computerName == "$prefix$locName$serialNumber" ]]; then
                         echo "ComputerName = Good set!"
                     else
                         echo "ComputerName = NEEDS ATTENTION!"
                     fi
             fi
-            localHostName=$(scutil --get LocalHostName)
+            localHostName=$(/usr/sbin/scutil --get LocalHostName)
             if [[ $localHostName == "$prefix$locName$serialNumber" ]]; then
                 echo "LocalHostName = Good set!"
             else
                 echo "LocalHostName is NOT $prefix$locName$serialNumber"
                 echo "Setting LocalHostName..."
-                scutil --set LocalHostName "$prefix$locName$serialNumber"
+                /usr/sbin/scutil --set LocalHostName "$prefix$locName$serialNumber"
+                sleep 1
                     if [[ $localHostName == "$prefix$locName$serialNumber" ]]; then
                         echo "LocalHostName = Good set!"
                     else
@@ -177,11 +274,12 @@ renameMachineFunc() {
 }
 ### end functions
 
-# SoS
+# Start of Script
+swiftDialogCheck
     findNetworkSegment
 echo "Location: $result"
     renameMachineFunc
 
     if [ "$removeLater" -eq 1 ]; then rm -rf "$temp_file"; fi
     exit 0
-# EoS
+# End of Script
