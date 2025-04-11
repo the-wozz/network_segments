@@ -779,6 +779,12 @@
       "name": "NA-US-SanFrancisco (USSF)-5",
       "starting_address": "10.50.37.1",
       "ending_address": "10.50.37.254"
+    },
+    {
+      "id": 134,
+      "name": "NA-US-Richardson (USRC)-7",
+      "starting_address": "10.10.90.1",
+      "ending_address": "10.10.90.254"
     }
   ]
 }
