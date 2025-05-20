@@ -554,7 +554,7 @@
     },
     {
       "id": 96,
-      "name": ".Offsite (HOME)",
+      "name": ".Offsite (RMTE)",
       "starting_address": "192.168.0.0",
       "ending_address": "192.168.255.254"
     },
